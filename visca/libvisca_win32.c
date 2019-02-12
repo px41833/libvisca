@@ -212,7 +212,7 @@ VISCA_open_serial(VISCAInterface_t *iface, const char *device_name)
       return VISCA_FAILURE;
   }
   cto.ReadIntervalTimeout = 100;		     /* 20ms would be good, but 100 are for usb-rs232 */
-  cto.ReadTotalTimeoutConstant = 6000;	     /* 6s  */
+  cto.ReadTotalTimeoutConstant = 10000;	     /* 10s  */
   cto.ReadTotalTimeoutMultiplier = 50;	     /* 50ms for each char */
   cto.WriteTotalTimeoutMultiplier = 500;
   cto.WriteTotalTimeoutConstant = 1000;

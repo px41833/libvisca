@@ -101,7 +101,7 @@ _VISCA_get_reply2(VISCAInterface_t *iface, VISCACamera_t *camera)
       iface->type=iface->ibuf[1]&0xF0;
     }
  
-  return VISCA_FAILURE;
+  return VISCA_SUCCESS;
 }
 
 VISCA_API uint32_t
@@ -341,7 +341,7 @@ VISCA_set_zoom_tele_speed(VISCAInterface_t *iface, VISCACamera_t *camera, uint32
   _VISCA_append_byte(&packet, VISCA_ZOOM);
   _VISCA_append_byte(&packet, VISCA_ZOOM_TELE_SPEED | (speed & 0x7));
 
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 
@@ -356,7 +356,7 @@ VISCA_set_zoom_wide_speed(VISCAInterface_t *iface, VISCACamera_t *camera, uint32
   _VISCA_append_byte(&packet, VISCA_ZOOM);
   _VISCA_append_byte(&packet, VISCA_ZOOM_WIDE_SPEED | (speed & 0x7));
 
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 
 }
 
@@ -375,7 +375,7 @@ VISCA_set_zoom_value(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t zo
   _VISCA_append_byte(&packet, (zoom & 0x00F0) >>  4);
   _VISCA_append_byte(&packet, (zoom & 0x000F));
 
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 
@@ -1692,7 +1692,7 @@ VISCA_get_zoom_value(VISCAInterface_t *iface, VISCACamera_t *camera, uint16_t *v
   _VISCA_append_byte(&packet, VISCA_INQUIRY);
   _VISCA_append_byte(&packet, VISCA_CATEGORY_CAMERA1);
   _VISCA_append_byte(&packet, VISCA_ZOOM_VALUE);
-  err=_VISCA_send_packet_with_reply(iface, camera, &packet);
+  err=_VISCA_send_packet_with_reply2(iface, camera, &packet);
   if (err!=VISCA_SUCCESS)
     return err;
   else {
@@ -2345,7 +2345,7 @@ VISCA_set_pantilt_up(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t pa
   _VISCA_append_byte(&packet, tilt_speed);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_HORIZ_STOP);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_VERT_UP);
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 VISCA_API uint32_t
@@ -2361,7 +2361,7 @@ VISCA_set_pantilt_down(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t 
   _VISCA_append_byte(&packet, tilt_speed);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_HORIZ_STOP);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_VERT_DOWN);
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 VISCA_API uint32_t
@@ -2377,7 +2377,7 @@ VISCA_set_pantilt_left(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t 
   _VISCA_append_byte(&packet, tilt_speed);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_HORIZ_LEFT);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_VERT_STOP);
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 VISCA_API uint32_t
@@ -2393,7 +2393,7 @@ VISCA_set_pantilt_right(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t
   _VISCA_append_byte(&packet, tilt_speed);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_HORIZ_RIGHT);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_VERT_STOP);
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 VISCA_API uint32_t
@@ -2409,7 +2409,7 @@ VISCA_set_pantilt_upleft(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_
   _VISCA_append_byte(&packet, tilt_speed);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_HORIZ_LEFT);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_VERT_UP);
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 VISCA_API uint32_t
@@ -2425,7 +2425,7 @@ VISCA_set_pantilt_upright(VISCAInterface_t *iface, VISCACamera_t *camera, uint32
   _VISCA_append_byte(&packet, tilt_speed);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_HORIZ_RIGHT);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_VERT_UP);
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 VISCA_API uint32_t
@@ -2441,7 +2441,7 @@ VISCA_set_pantilt_downleft(VISCAInterface_t *iface, VISCACamera_t *camera, uint3
   _VISCA_append_byte(&packet, tilt_speed);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_HORIZ_LEFT);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_VERT_DOWN);
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 VISCA_API uint32_t
@@ -2457,7 +2457,7 @@ VISCA_set_pantilt_downright(VISCAInterface_t *iface, VISCACamera_t *camera, uint
   _VISCA_append_byte(&packet, tilt_speed);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_HORIZ_RIGHT);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_VERT_DOWN);
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 VISCA_API uint32_t
@@ -2473,7 +2473,7 @@ VISCA_set_pantilt_stop(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t 
   _VISCA_append_byte(&packet, tilt_speed);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_HORIZ_STOP);
   _VISCA_append_byte(&packet, VISCA_PT_DRIVE_VERT_STOP);
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 VISCA_API uint32_t
@@ -2501,7 +2501,7 @@ VISCA_set_pantilt_absolute_position(VISCAInterface_t *iface, VISCACamera_t *came
   _VISCA_append_byte(&packet, (tilt_pos & 0x00f0) >> 4);
   _VISCA_append_byte(&packet, tilt_pos & 0x000f);
 
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 
@@ -2531,7 +2531,7 @@ VISCA_set_pantilt_relative_position(VISCAInterface_t *iface, VISCACamera_t *came
   _VISCA_append_byte(&packet, (tilt_pos & 0x00f0) >> 4);
   _VISCA_append_byte(&packet, tilt_pos & 0x000f);
 
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 VISCA_API uint32_t
@@ -2543,7 +2543,7 @@ VISCA_set_pantilt_home(VISCAInterface_t *iface, VISCACamera_t *camera)
   _VISCA_append_byte(&packet, VISCA_COMMAND);
   _VISCA_append_byte(&packet, VISCA_CATEGORY_PAN_TILTER);
   _VISCA_append_byte(&packet, VISCA_PT_HOME);
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 VISCA_API uint32_t
@@ -2583,7 +2583,7 @@ VISCA_set_pantilt_limit_upright(VISCAInterface_t *iface, VISCACamera_t *camera, 
   _VISCA_append_byte(&packet, (tilt_pos & 0x00f0) >> 4);
   _VISCA_append_byte(&packet, tilt_pos & 0x000f);
 
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 
@@ -2612,7 +2612,7 @@ VISCA_set_pantilt_limit_downleft(VISCAInterface_t *iface, VISCACamera_t *camera,
   _VISCA_append_byte(&packet, (tilt_pos & 0x00f0) >> 4);
   _VISCA_append_byte(&packet, tilt_pos & 0x000f);
 
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 
@@ -2640,7 +2640,7 @@ VISCA_set_pantilt_limit_downleft_clear(VISCAInterface_t *iface, VISCACamera_t *c
   _VISCA_append_byte(&packet, (tilt_pos & 0x00f0) >> 4);
   _VISCA_append_byte(&packet, tilt_pos & 0x000f);
 
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 
@@ -2668,7 +2668,7 @@ VISCA_set_pantilt_limit_upright_clear(VISCAInterface_t *iface, VISCACamera_t *ca
   _VISCA_append_byte(&packet, (tilt_pos & 0x00f0) >> 4);
   _VISCA_append_byte(&packet, tilt_pos & 0x000f);
 
-  return _VISCA_send_packet_with_reply(iface, camera, &packet);
+  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
 }
 
 
