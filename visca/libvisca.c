@@ -2583,7 +2583,10 @@ VISCA_set_pantilt_limit_upright(VISCAInterface_t *iface, VISCACamera_t *camera, 
   _VISCA_append_byte(&packet, (tilt_pos & 0x00f0) >> 4);
   _VISCA_append_byte(&packet, tilt_pos & 0x000f);
 
-  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
+  // return _VISCA_send_packet_with_reply2(iface, camera, &packet);
+  if (_VISCA_send_packet(iface,camera,&packet)!=VISCA_SUCCESS)
+    return VISCA_FAILURE;
+  return VISCA_SUCCESS;
 }
 
 
@@ -2612,7 +2615,10 @@ VISCA_set_pantilt_limit_downleft(VISCAInterface_t *iface, VISCACamera_t *camera,
   _VISCA_append_byte(&packet, (tilt_pos & 0x00f0) >> 4);
   _VISCA_append_byte(&packet, tilt_pos & 0x000f);
 
-  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
+  // return _VISCA_send_packet_with_reply2(iface, camera, &packet);
+  if (_VISCA_send_packet(iface,camera,&packet)!=VISCA_SUCCESS)
+    return VISCA_FAILURE;
+  return VISCA_SUCCESS;
 }
 
 
@@ -2640,7 +2646,10 @@ VISCA_set_pantilt_limit_downleft_clear(VISCAInterface_t *iface, VISCACamera_t *c
   _VISCA_append_byte(&packet, (tilt_pos & 0x00f0) >> 4);
   _VISCA_append_byte(&packet, tilt_pos & 0x000f);
 
-  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
+  // return _VISCA_send_packet_with_reply2(iface, camera, &packet);
+  if (_VISCA_send_packet(iface,camera,&packet)!=VISCA_SUCCESS)
+    return VISCA_FAILURE;
+  return VISCA_SUCCESS;
 }
 
 
@@ -2668,7 +2677,10 @@ VISCA_set_pantilt_limit_upright_clear(VISCAInterface_t *iface, VISCACamera_t *ca
   _VISCA_append_byte(&packet, (tilt_pos & 0x00f0) >> 4);
   _VISCA_append_byte(&packet, tilt_pos & 0x000f);
 
-  return _VISCA_send_packet_with_reply2(iface, camera, &packet);
+  // return _VISCA_send_packet_with_reply2(iface, camera, &packet);
+  if (_VISCA_send_packet(iface,camera,&packet)!=VISCA_SUCCESS)
+    return VISCA_FAILURE;
+  return VISCA_SUCCESS;
 }
 
 
